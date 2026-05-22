@@ -665,7 +665,9 @@ footer{
     <p class="contact-p">The audit is free and takes 45 minutes. Works for product brands and service providers equally. Fill this out and I'll be in touch within 24 hours to schedule. No pitch — just findings.</p>
 
     <div id="contactForm">
-      <form class="contact-form" onsubmit="handleContact(event)">
+      <form class="contact-form" name="daily-twine-inquiry" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleContact(event)">
+        <input type="hidden" name="form-name" value="daily-twine-inquiry"/>
+        <div style="display:none"><input name="bot-field"/></div>
         <div class="cf-row">
           <div class="cf-group">
             <label class="cf-label" for="cfName">Your name</label>
@@ -735,7 +737,7 @@ footer{
 </footer>
 
 <script>
-function handleContact(e) {
+async function handleContact(e) {
   e.preventDefault();
   const btn = e.target.querySelector('.cf-submit');
   btn.disabled = true;
@@ -751,10 +753,22 @@ function handleContact(e) {
     submittedAt: new Date().toISOString()
   };
 
-  console.log('Daily Twine inquiry:', JSON.stringify(data, null, 2));
+  // POST to Netlify Forms
+  const formData = new FormData();
+  formData.append('form-name', 'daily-twine-inquiry');
+  Object.entries(data).forEach(([key, val]) => {
+    if (val !== null && val !== undefined) formData.append(key, String(val));
+  });
 
-  // Connect your endpoint here:
-  // fetch('YOUR_ENDPOINT', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: {'Accept': 'application/x-www-form-urlencoded'},
+      body: new URLSearchParams(formData).toString()
+    });
+  } catch(err) {
+    console.error('Submission error:', err);
+  }
 
   setTimeout(() => {
     document.getElementById('contactForm').style.display = 'none';
