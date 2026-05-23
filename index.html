@@ -665,7 +665,7 @@ footer{
     <p class="contact-p">The audit is free and takes 45 minutes. Works for product brands and service providers equally. Fill this out and I'll be in touch within 24 hours to schedule. No pitch — just findings.</p>
 
     <div id="contactForm">
-      <form class="contact-form" name="daily-twine-inquiry" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleContact(event)">
+      <form class="contact-form" name="daily-twine-inquiry" method="POST" action="/" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleContact(event)">
         <input type="hidden" name="form-name" value="daily-twine-inquiry"/>
         <div style="display:none"><input name="bot-field"/></div>
         <div class="cf-row">
@@ -739,40 +739,37 @@ footer{
 <script>
 async function handleContact(e) {
   e.preventDefault();
+
   const btn = e.target.querySelector('.cf-submit');
   btn.disabled = true;
   btn.textContent = 'Sending...';
 
-  const data = {
-    name: document.getElementById('cfName').value,
-    phone: document.getElementById('cfPhone').value,
-    email: document.getElementById('cfEmail').value,
-    brand: document.getElementById('cfBrand').value,
-    revenue: document.getElementById('cfRevenue').value,
-    problem: document.getElementById('cfProblem').value,
-    service: document.getElementById('cfService').value,
-    submittedAt: new Date().toISOString()
-  };
-
-  // POST to Netlify Forms using the actual form element
-  const formEl = document.getElementById('contactForm').querySelector('form');
+  const formEl = e.target;
   const formData = new FormData(formEl);
 
   try {
-    await fetch('/', {
+    const res = await fetch('/', {
       method: 'POST',
-      headers: {'Accept': 'application/x-www-form-urlencoded'},
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: new URLSearchParams(formData).toString()
     });
+
+    if (res.ok) {
+      document.getElementById('contactForm').style.display = 'none';
+      const success = document.getElementById('cfSuccess');
+      success.classList.add('show');
+      success.scrollIntoView({behavior:'smooth', block:'center'});
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Book my free audit →';
+      alert('Something went wrong — please email hello@dailyengineers.com directly.');
+    }
   } catch(err) {
     console.error('Submission error:', err);
+    btn.disabled = false;
+    btn.textContent = 'Book my free audit →';
+    alert('Something went wrong — please email hello@dailyengineers.com directly.');
   }
-
-  setTimeout(() => {
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('cfSuccess').classList.add('show');
-    document.getElementById('cfSuccess').scrollIntoView({behavior:'smooth', block:'center'});
-  }, 600);
 }
 </script>
 
