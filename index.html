@@ -671,25 +671,25 @@ footer{
         <div class="cf-row">
           <div class="cf-group">
             <label class="cf-label" for="cfName">Your name</label>
-            <input class="cf-input" type="text" id="cfName" placeholder="First and last name" required/>
+            <input class="cf-input" type="text" id="cfName" name="name" placeholder="First and last name" required/>
           </div>
           <div class="cf-group">
             <label class="cf-label" for="cfEmail">Email address</label>
-            <input class="cf-input" type="email" id="cfEmail" placeholder="you@yourbrand.com" required/>
+            <input class="cf-input" type="email" id="cfEmail" name="email" placeholder="you@yourbrand.com" required/>
           </div>
         </div>
         <div class="cf-group">
           <label class="cf-label" for="cfPhone">Phone number <span style="font-weight:300;text-transform:none;letter-spacing:0;color:#3A2A20">(optional — in case email misses you)</span></label>
-          <input class="cf-input" type="tel" id="cfPhone" placeholder="(555) 000-0000"/>
+          <input class="cf-input" type="tel" id="cfPhone" name="phone" placeholder="(555) 000-0000"/>
         </div>
         <div class="cf-row">
           <div class="cf-group">
             <label class="cf-label" for="cfBrand">Business name</label>
-            <input class="cf-input" type="text" id="cfBrand" placeholder="Your brand, studio, or business" required/>
+            <input class="cf-input" type="text" id="cfBrand" name="brand" placeholder="Your brand, studio, or business" required/>
           </div>
           <div class="cf-group">
             <label class="cf-label" for="cfRevenue">Annual revenue or booking volume</label>
-            <select class="cf-input" id="cfRevenue">
+            <select class="cf-input" id="cfRevenue" name="revenue">
               <option value="" disabled selected>Select a range</option>
               <option>Under $50K</option>
               <option>$50K–$150K</option>
@@ -701,11 +701,11 @@ footer{
         </div>
         <div class="cf-group">
           <label class="cf-label" for="cfProblem">What's your biggest client retention challenge right now?</label>
-          <textarea class="cf-input" id="cfProblem" placeholder="Product brand, salon, studio, or solo service provider — tell me what you're seeing. Low rebooking rates, no post-purchase follow-up, clients going quiet — whatever you know and whatever you're unsure about..."></textarea>
+          <textarea class="cf-input" id="cfProblem" name="problem" placeholder="Product brand, salon, studio, or solo service provider — tell me what you're seeing. Low rebooking rates, no post-purchase follow-up, clients going quiet — whatever you know and whatever you're unsure about..."></textarea>
         </div>
         <div class="cf-group">
           <label class="cf-label" for="cfService">What are you most interested in?</label>
-          <select class="cf-input" id="cfService">
+          <select class="cf-input" id="cfService" name="service">
             <option value="" disabled selected>Select a service</option>
             <option>Free systems audit — let's start there</option>
             <option>One Flow, Deployed — $400 one-time</option>
@@ -745,6 +745,7 @@ async function handleContact(e) {
 
   const data = {
     name: document.getElementById('cfName').value,
+    phone: document.getElementById('cfPhone').value,
     email: document.getElementById('cfEmail').value,
     brand: document.getElementById('cfBrand').value,
     revenue: document.getElementById('cfRevenue').value,
@@ -753,12 +754,9 @@ async function handleContact(e) {
     submittedAt: new Date().toISOString()
   };
 
-  // POST to Netlify Forms
-  const formData = new FormData();
-  formData.append('form-name', 'daily-twine-inquiry');
-  Object.entries(data).forEach(([key, val]) => {
-    if (val !== null && val !== undefined) formData.append(key, String(val));
-  });
+  // POST to Netlify Forms using the actual form element
+  const formEl = document.getElementById('contactForm').querySelector('form');
+  const formData = new FormData(formEl);
 
   try {
     await fetch('/', {
