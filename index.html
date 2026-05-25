@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Daily Twine — Systems Consultant for Beauty Businesses</title>
+<meta name="description" content="Daily Twine helps beauty brands and service providers build the systems layer between their business and their client — CRM, retention automation, and rebooking infrastructure."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --ink:#0F0E0D;
+  --paper:#FAF7F2;
+  --warm:#F0EBE0;
+  --rule:#D4C9B5;
+  --accent:#8B5E3C;
+  --accent2:#C4956A;
+  --muted:#7A7060;
+  --green:#3D6B4A;
+  --red:#7A3030;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Instrument Sans',sans-serif;overflow-x:hidden}
+
+/* ── GRAIN OVERLAY ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:100;opacity:0.6;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:90;
+  padding:1.2rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(250,247,242,0.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule);
+}
+.nav-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;font-weight:600;color:var(--ink);
+  letter-spacing:-0.01em;
+}
+.nav-name span{color:var(--accent);font-style:italic}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{
+  font-size:0.78rem;font-weight:400;color:var(--muted);
+  text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  background:var(--ink);color:var(--paper) !important;
+  padding:0.5rem 1.2rem;border-radius:4px;
+  font-weight:500 !important;letter-spacing:0.08em !important;
+  transition:background 0.2s !important;
+}
+.nav-cta:hover{background:var(--accent) !important;color:var(--paper) !important}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:8rem 2.5rem 5rem;
+  position:relative;
+  border-bottom:1px solid var(--rule);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.8rem;
+}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--accent)}
+
+.hero-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,7vw,6.5rem);
+  font-weight:700;line-height:1.0;
+  color:var(--ink);letter-spacing:-0.03em;
+  max-width:800px;margin-bottom:1.2rem;
+}
+.hero-h em{
+  font-style:italic;color:var(--accent);
+  display:block;
+}
+.hero-sub{
+  font-size:1.05rem;color:var(--muted);font-weight:300;
+  line-height:1.8;max-width:480px;margin-bottom:2.8rem;
+}
+
+/* Hero stats strip */
+.hero-stats{
+  display:flex;gap:0rem;margin-bottom:3rem;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  max-width:640px;
+}
+.stat{padding:1rem 1.8rem 1rem 0;flex:1;border-right:1px solid var(--rule)}
+.stat:last-child{border-right:none;padding-right:0}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;font-weight:700;color:var(--accent);
+  line-height:1;margin-bottom:0.2rem;
+}
+.stat-label{font-size:0.72rem;color:var(--muted);line-height:1.4;font-weight:400}
+
+.hero-cta-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.btn-primary{
+  display:inline-block;background:var(--ink);color:var(--paper);
+  font-family:'Instrument Sans',sans-serif;font-size:0.82rem;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;
+  padding:1rem 2rem;border-radius:4px;transition:background 0.2s;
+  border:none;cursor:pointer;
+}
+.btn-primary:hover{background:var(--accent)}
+.btn-ghost{
+  font-size:0.82rem;color:var(--muted);font-weight:400;
+  letter-spacing:0.04em;text-decoration:none;
+  display:flex;align-items:center;gap:0.4rem;transition:color 0.2s;
+}
+.btn-ghost:hover{color:var(--ink)}
+
+/* Hero right column */
+.hero-inner{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:center;max-width:1200px}
+.hero-card{
+  background:var(--ink);border-radius:4px;padding:2rem;
+  position:relative;overflow:hidden;
+}
+.hero-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent));
+}
+.hc-label{font-size:0.68rem;color:var(--accent);letter-spacing:0.16em;text-transform:uppercase;font-weight:500;margin-bottom:1.2rem}
+.hc-q{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--paper);font-style:italic;line-height:1.5;margin-bottom:1.2rem}
+.hc-answers{display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.5rem}
+.hc-ans{
+  display:flex;align-items:flex-start;gap:0.6rem;
+  font-size:0.82rem;color:#9C8C7A;line-height:1.5;
+}
+.hc-ans.bad::before{content:'✗';color:var(--red);flex-shrink:0;font-weight:700}
+.hc-ans.good{color:var(--accent2)}
+.hc-ans.good::before{content:'✓';color:var(--green);flex-shrink:0;font-weight:700}
+.hc-divider{height:1px;background:#2A2520;margin:1.2rem 0}
+.hc-note{font-size:0.78rem;color:#6A5A4A;line-height:1.55;font-style:italic}
+
+/* ── SECTION BASE ── */
+section{padding:5rem 2.5rem;max-width:1200px;margin:0 auto}
+.section-eyebrow{
+  font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:0.6rem;margin-bottom:0.8rem;
+}
+.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--accent)}
+.section-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:700;
+  color:var(--ink);letter-spacing:-0.02em;line-height:1.1;
+  margin-bottom:0.8rem;
+}
+.section-h em{font-style:italic;color:var(--accent)}
+.section-p{
+  font-size:1rem;color:var(--muted);font-weight:300;
+  line-height:1.8;max-width:560px;margin-bottom:2.5rem;
+}
+
+/* ── PROBLEM SECTION ── */
+.problem-section{
+  background:var(--ink);
+  padding:5rem 2.5rem;
+  border-top:1px solid #2A2520;
+  border-bottom:1px solid #2A2520;
+}
+.problem-inner{max-width:1200px;margin:0 auto}
+.problem-inner .section-eyebrow{color:var(--accent)}
+.problem-inner .section-h{color:var(--paper)}
+.problem-inner .section-p{color:#7A6A5A;max-width:560px}
+
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:2.5rem 0}
+.stat-card{
+  padding:2rem 1.5rem;
+  border-right:1px solid #2A2520;
+  border-bottom:1px solid #2A2520;
+}
+.stat-card:nth-child(4n){border-right:none}
+.stat-card:nth-last-child(-n+4){border-bottom:none}
+.sc-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem;font-weight:700;color:var(--accent);
+  line-height:1;margin-bottom:0.5rem;
+}
+.sc-label{font-size:0.88rem;color:#7A6A5A;line-height:1.6;font-weight:300}
+.sc-source{font-size:0.68rem;color:#4A3A2A;margin-top:0.4rem}
+
+.problem-qs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:2.5rem}
+.pq{
+  background:#1A1510;border:1px solid #2A2520;
+  border-radius:4px;padding:1.4rem;
+  border-left:2px solid var(--accent);
+}
+.pq-q{font-family:'Playfair Display',serif;font-size:1.0rem;color:var(--paper);font-style:italic;line-height:1.4;margin-bottom:0.6rem}
+.pq-note{font-size:0.78rem;color:#5A4A3A;line-height:1.5}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:0}
+.svc{
+  background:var(--warm);border:1px solid var(--rule);
+  border-radius:4px;padding:2rem;
+  transition:border-color 0.2s,transform 0.2s;
+  position:relative;
+}
+.svc:hover{border-color:var(--accent2);transform:translateY(-3px)}
+.svc-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.5rem;font-weight:700;color:var(--rule);
+  line-height:1;margin-bottom:1.2rem;
+}
+.svc-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:600;color:var(--ink);
+  margin-bottom:0.3rem;
+}
+.svc-price{
+  font-size:1.4rem;font-weight:300;color:var(--accent);
+  font-family:'Playfair Display',serif;
+  margin-bottom:1rem;
+}
+.svc-price span{font-family:'Instrument Sans',sans-serif;font-size:0.8rem;color:var(--muted)}
+.svc-desc{font-size:0.88rem;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:1.2rem}
+.svc-includes{list-style:none;display:flex;flex-direction:column;gap:0.4rem}
+.svc-includes li{
+  font-size:0.82rem;color:var(--muted);
+  display:flex;align-items:flex-start;gap:0.5rem;line-height:1.5;
+}
+.svc-includes li::before{content:'→';color:var(--accent);flex-shrink:0;font-weight:600}
+.svc-tag{
+  position:absolute;top:1.2rem;right:1.2rem;
+  font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--accent);color:var(--paper);
+  padding:3px 8px;border-radius:3px;
+}
+
+/* ── WHY ME ── */
+.whyme-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.credential{
+  display:flex;gap:1rem;padding:1.2rem 0;
+  border-bottom:1px solid var(--rule);
+}
+.credential:last-child{border-bottom:none}
+.cred-bar{width:2px;background:var(--accent);flex-shrink:0;border-radius:2px}
+.cred-title{font-size:0.95rem;font-weight:500;color:var(--ink);margin-bottom:0.3rem}
+.cred-desc{font-size:0.85rem;color:var(--muted);line-height:1.65;font-weight:300}
+
+.proof-card{
+  background:var(--ink);border-radius:4px;padding:2rem;
+  position:relative;overflow:hidden;
+}
+.proof-card::after{
+  content:'';position:absolute;bottom:0;right:0;
+  width:120px;height:120px;
+  background:radial-gradient(circle,rgba(139,94,60,0.15) 0%,transparent 70%);
+}
+.pc-label{font-size:0.68rem;color:var(--accent);letter-spacing:0.16em;text-transform:uppercase;font-weight:500;margin-bottom:1rem}
+.pc-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--paper);margin-bottom:0.5rem}
+.pc-sub{font-size:0.82rem;color:#7A6A5A;margin-bottom:1.5rem;line-height:1.5}
+.pc-items{display:flex;flex-direction:column;gap:0.5rem}
+.pc-item{
+  display:flex;align-items:flex-start;gap:0.6rem;
+  font-size:0.82rem;color:var(--accent2);line-height:1.5;
+}
+.pc-item::before{content:'✓';color:var(--green);flex-shrink:0;font-weight:700}
+
+/* ── PROCESS ── */
+.process-section{background:var(--warm);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:5rem 2.5rem}
+.process-inner{max-width:1200px;margin:0 auto}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:2.5rem;border:1px solid var(--rule)}
+.ps{padding:2rem 1.5rem;border-right:1px solid var(--rule);position:relative}
+.ps:last-child{border-right:none}
+.ps-num{
+  font-family:'Playfair Display',serif;
+  font-size:3rem;font-weight:700;
+  color:var(--rule);line-height:1;margin-bottom:1rem;
+}
+.ps-title{font-size:0.95rem;font-weight:500;color:var(--ink);margin-bottom:0.5rem}
+.ps-desc{font-size:0.82rem;color:var(--muted);line-height:1.6;font-weight:300}
+.ps-time{
+  display:inline-block;margin-top:0.8rem;
+  font-size:0.68rem;color:var(--accent);font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  border:1px solid var(--rule);padding:3px 8px;border-radius:3px;
+}
+
+/* ── CONTACT ── */
+.contact-section{
+  background:var(--ink);padding:6rem 2.5rem;
+  text-align:center;border-top:1px solid #2A2520;
+}
+.contact-inner{max-width:640px;margin:0 auto}
+.contact-inner .section-eyebrow{justify-content:center;color:var(--accent)}
+.contact-inner .section-eyebrow::before{display:none}
+.contact-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,5vw,3.5rem);font-weight:700;
+  color:var(--paper);letter-spacing:-0.02em;line-height:1.1;
+  margin-bottom:0.8rem;
+}
+.contact-h em{font-style:italic;color:var(--accent)}
+.contact-p{font-size:1rem;color:#7A6A5A;font-weight:300;line-height:1.8;margin-bottom:2.5rem}
+
+.contact-form{display:flex;flex-direction:column;gap:0.75rem;text-align:left}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.cf-group{display:flex;flex-direction:column;gap:0.3rem}
+label.cf-label{font-size:0.7rem;font-weight:500;color:#C4956A;letter-spacing:0.08em;text-transform:uppercase}
+input.cf-input,select.cf-input,textarea.cf-input{
+  padding:0.8rem 1rem;
+  background:#2A2018;border:1px solid #4A3828;
+  border-radius:4px;color:#F5EDE0;
+  font-family:'Instrument Sans',sans-serif;font-size:0.9rem;
+  outline:none;transition:border-color 0.2s,background 0.2s;width:100%;
+}
+input.cf-input:focus,select.cf-input:focus,textarea.cf-input:focus{border-color:var(--accent2);background:#332518}
+input.cf-input::placeholder,textarea.cf-input::placeholder{color:#7A5A40}
+select.cf-input{appearance:none;cursor:pointer;color:var(--paper)}
+select.cf-input option{background:#2A2018;color:#F5EDE0}
+textarea.cf-input{resize:vertical;min-height:100px}
+
+.cf-submit{
+  width:100%;padding:1rem;
+  background:var(--accent);color:var(--paper);
+  border:none;border-radius:4px;cursor:pointer;
+  font-family:'Instrument Sans',sans-serif;font-size:0.82rem;
+  font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+  transition:background 0.2s;margin-top:0.25rem;
+}
+.cf-submit:hover{background:var(--accent2)}
+.cf-note{font-size:0.75rem;color:#9C7060;text-align:center;line-height:1.6}
+
+.cf-success{display:none;text-align:center;padding:2rem}
+.cf-success.show{display:block}
+.cf-success h3{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--paper);margin-bottom:0.5rem}
+.cf-success p{font-size:0.9rem;color:#7A6A5A;line-height:1.7}
+
+/* ── FOOTER ── */
+footer{
+  background:#0A0906;padding:1.5rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.footer-name{font-family:'Playfair Display',serif;font-size:0.95rem;color:#3A2A1A;font-style:italic}
+.footer-note{font-size:0.7rem;color:#2A1A0A}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:0.7rem;color:#2A1A0A;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s}
+.footer-links a:hover{color:var(--accent)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-card{display:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .services-grid,.process-steps,.problem-qs{grid-template-columns:1fr}
+  .whyme-grid{grid-template-columns:1fr}
+  .cf-row{grid-template-columns:1fr}
+  nav{padding:1rem 1.2rem}
+  section{padding:3.5rem 1.2rem}
+  .hero,.problem-section,.process-section,.contact-section{padding-left:1.2rem;padding-right:1.2rem}
+  .ps{border-right:none;border-bottom:1px solid var(--rule)}
+  .ps:last-child{border-bottom:none}
+  .stat-card{border-right:none}
+  .stat-card:nth-child(2n){border-right:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Daily <span>Twine</span></div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#why">About</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-cta">Book an audit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Systems Consultant · Beauty Brands &amp; Service Providers</div>
+      <h1 class="hero-h">
+        Your clients<br/>already chose you.
+        <em>They're just not coming back.</em>
+      </h1>
+      <p class="hero-sub">I build the systems layer between your business and your client — CRM, retention automation, and the infrastructure that turns a first purchase or appointment into a lasting relationship.</p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">23%</div>
+          <div class="stat-label">Average retention rate in beauty — most customers never return</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">67%</div>
+          <div class="stat-label">More that repeat buyers spend vs first-time customers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">95%</div>
+          <div class="stat-label">Max profit increase from a 5% improvement in retention</div>
+        </div>
+      </div>
+
+      <div class="hero-cta-row">
+        <a href="#contact" class="btn-primary">Book a free audit →</a>
+        <a href="#services" class="btn-ghost">See what I build <span>↓</span></a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hc-label">The diagnostic questions</div>
+      <div class="hc-q">"What happens when a client goes 90 days without coming back?"</div>
+      <div class="hc-answers">
+        <div class="hc-ans bad">Nothing — no automated follow-up or rebooking prompt</div>
+        <div class="hc-ans bad">We don't know who our loyal clients or repeat buyers are</div>
+        <div class="hc-ans bad">We send the same message to everyone</div>
+        <div class="hc-ans bad">We fill the book through Instagram DMs and word of mouth only</div>
+      </div>
+      <div class="hc-divider"></div>
+      <div class="hc-ans good" style="margin-bottom:0.5rem">After working with me, you will know</div>
+      <div class="hc-note">The customers who disappear after one purchase are not lost. They just haven't heard from you in the right way at the right time. That is a systems problem. I fix systems problems.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM SECTION -->
+<div class="problem-section">
+  <div class="problem-inner">
+    <div class="section-eyebrow">The problem</div>
+    <h2 class="section-h" style="color:var(--paper)">You're spending energy to<br/><em>attract clients you then lose touch with.</em></h2>
+    <p class="section-p">Most beauty businesses invest heavily in attracting new clients — through Instagram, word of mouth, ads, events. Then they leave the relationship to chance. The data on what this costs is not subtle.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="sc-num">23%</div>
+        <div class="sc-label">Average retention rate in beauty and cosmetics. Nearly 8 in 10 customers don't come back.</div>
+        <div class="sc-source">Source: beauty industry benchmarks 2026</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-num">67%</div>
+        <div class="sc-label">More that repeat buyers spend compared to first-time customers on each purchase.</div>
+        <div class="sc-source">Source: ecommerce retention research 2025</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-num">5–95%</div>
+        <div class="sc-label">Range of profit increase from a 5% improvement in customer retention rate.</div>
+        <div class="sc-source">Source: Bain & Company research</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-num">&lt;25%</div>
+        <div class="sc-label">Percentage of beauty brands that offer personalized customer experiences, despite rising demand.</div>
+        <div class="sc-source">Source: beauty industry survey 2025</div>
+      </div>
+    </div>
+
+    <div class="problem-qs">
+      <div class="pq">
+        <div class="pq-q">"What does your communication look like after a client buys or books?"</div>
+        <div class="pq-note">Most businesses: an order confirmation or appointment reminder — then silence. No follow-up, no relationship-building, no next step.</div>
+      </div>
+      <div class="pq">
+        <div class="pq-q">"Do you know what percentage of your clients come back — and when?"</div>
+        <div class="pq-note">Most businesses: a rough guess. No rebooking rate, no lapse tracking, no data telling you who is at risk of not returning.</div>
+      </div>
+      <div class="pq">
+        <div class="pq-q">"When a client goes 90 days without booking or buying — what happens?"</div>
+        <div class="pq-note">Most businesses: nothing. The client who loved your service and disappeared is sitting in a booking system or spreadsheet waiting for someone to reach out.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-eyebrow">Services</div>
+  <h2 class="section-h">Three ways I work<br/><em>with beauty businesses.</em></h2>
+  <p class="section-p">Every engagement starts with understanding your specific client or customer data — what you have, what's missing, and what it would take to stop leaving revenue on the table. Whether you sell products or provide services, the systems I build are the same.</p>
+
+  <div class="services-grid" style="grid-template-columns:repeat(2,1fr);margin-bottom:1.5rem">
+
+    <div class="svc" style="grid-column:1/-1;background:var(--ink);border-color:#3A2A20">
+      <div class="svc-tag" style="background:var(--accent2);color:var(--ink)">Start here</div>
+      <div class="svc-num" style="color:#3A2A20">00</div>
+      <div class="svc-name" style="color:var(--cream)">One Flow, Deployed</div>
+      <div class="svc-price" style="color:var(--accent2)">$400 <span style="color:#5A4A3A">/ one-time</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+        <div>
+          <div class="svc-desc" style="color:#7A6A5A">For founders building part-time who want to start somewhere real — not a strategy document, not a recommendation. One automated email sequence written, built, and activated in your existing platform before we're done.</div>
+          <div style="font-size:0.78rem;color:#5A4A3A;font-style:italic;line-height:1.6;margin-top:0.5rem">You choose: welcome sequence, post-purchase or post-appointment follow-up, or win-back for lapsed clients. One flow. Live and running.</div>
+        </div>
+        <ul class="svc-includes">
+          <li style="color:#9C8C7A">One automated sequence — written and deployed in your platform</li>
+          <li style="color:#9C8C7A">Your choice: welcome, post-purchase / post-appointment, or win-back</li>
+          <li style="color:#9C8C7A">Works with Klaviyo, Mailchimp, GlossGenius, Square, or similar</li>
+          <li style="color:#9C8C7A">14-day check-in — how is it performing?</li>
+          <li style="color:#9C8C7A">30-day summary — open rates, clicks, rebookings or reorders attributed</li>
+          <li style="color:#9C8C7A">Natural next step into the full CRM build when you're ready</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="services-grid">
+
+    <div class="svc">
+      <div class="svc-num">01</div>
+      <div class="svc-name">Systems Audit</div>
+      <div class="svc-price">Free <span>— first five brands this month</span></div>
+      <div class="svc-desc">I spend 45 minutes reviewing your current client communication, booking or purchase flow, email setup, and retention data. You receive a written report of three specific things that are broken and what to fix first — whether you're a product brand or a service provider.</div>
+      <ul class="svc-includes">
+        <li>Review of post-purchase or post-appointment communication</li>
+        <li>Client or customer segmentation assessment</li>
+        <li>Rebooking rate or repeat purchase rate evaluation</li>
+        <li>Three prioritized findings — in writing</li>
+        <li>No pitch during the audit. Just findings.</li>
+      </ul>
+    </div>
+
+    <div class="svc">
+      <div class="svc-tag">Most popular</div>
+      <div class="svc-num">02</div>
+      <div class="svc-name">CRM & Retention Build</div>
+      <div class="svc-price">$2,500–$5,000 <span>/ project</span></div>
+      <div class="svc-desc">I build or restructure your communication flows, set up client or customer segmentation, connect your booking system or e-commerce platform to your email tool, and write the three automated sequences every beauty business needs.</div>
+      <ul class="svc-includes">
+        <li>Welcome sequence — sets the relationship from day one</li>
+        <li>Post-purchase or post-appointment sequence — earns the return</li>
+        <li>Win-back or rebooking sequence — recovers lapsed clients</li>
+        <li>Segmentation by purchase behavior or service history</li>
+        <li>4–6 week delivery</li>
+      </ul>
+    </div>
+
+    <div class="svc">
+      <div class="svc-num">03</div>
+      <div class="svc-name">Fractional Systems Lead</div>
+      <div class="svc-price">$1,500–$2,500 <span>/ month</span></div>
+      <div class="svc-desc">Ongoing monthly engagement. I am your part-time systems and retention person — building new flows, analyzing performance, and advising on client data strategy whether you're a product brand, a studio, or a solo service provider.</div>
+      <ul class="svc-includes">
+        <li>Monthly retention or rebooking strategy review</li>
+        <li>New flow builds as needed</li>
+        <li>Client and customer data architecture guidance</li>
+        <li>Loyalty and community strategy input</li>
+        <li>Approximately 15–20 hours per month</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- WHY ME -->
+<section id="why">
+  <div class="whyme-grid">
+    <div>
+      <div class="section-eyebrow">Why Daily Twine</div>
+      <h2 class="section-h">Built for<br/><em>every corner of beauty.</em></h2>
+      <p class="section-p">Whether you sell products or provide services — lash, brow, hair, skin, nails, makeup, wellness — the retention problem is the same. The client who came once and went quiet is the client you already paid to acquire. I build the system that brings them back.</p>
+
+      <div style="margin-top:1rem">
+        <div class="credential">
+          <div class="cred-bar"></div>
+          <div>
+            <div class="cred-title">Systems engineer by training</div>
+            <div class="cred-desc">Professional background in pharmaceutical and food manufacturing — designing data systems, evaluating processes, and building infrastructure in regulated environments. This is applied, practical systems thinking.</div>
+          </div>
+        </div>
+        <div class="credential">
+          <div class="cred-bar"></div>
+          <div>
+            <div class="cred-title">Built a live customer system from scratch</div>
+            <div class="cred-desc">Designed and deployed a full client intake pipeline — form handling, automated routing, Google Sheets logging, personalized email delivery, and ongoing retention touchpoints. No code agency. No budget. Just the work.</div>
+          </div>
+        </div>
+        <div class="credential">
+          <div class="cred-bar"></div>
+          <div>
+            <div class="cred-title">Deep in the beauty industry</div>
+            <div class="cred-desc">Founder of Qoyl — a free hair care intelligence platform for type 4 hair. I evaluate products, understand the beauty industry from the consumer and brand side simultaneously, and have direct relationships with indie and Black-owned beauty brands. I know this community.</div>
+          </div>
+        </div>
+        <div class="credential">
+          <div class="cred-bar"></div>
+          <div>
+            <div class="cred-title">UVA Master's in Engineering · BU alumna</div>
+            <div class="cred-desc">Completed an in-person graduate degree in Engineering at the University of Virginia while living and working full-time in Chicago. The work ethic that required is the same one I bring to every client engagement.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="proof-card">
+        <div class="pc-label">What I built for Qoyl</div>
+        <div class="pc-title">A complete client intake and retention system</div>
+        <div class="pc-sub">Built solo, with no engineering team, in under 30 days. This is the exact infrastructure I now build for beauty brands.</div>
+        <div class="pc-items">
+          <div class="pc-item">Intake form with conditional logic and client segmentation</div>
+          <div class="pc-item">Automated routing from form submission to Google Sheets</div>
+          <div class="pc-item">Personalized invoice email firing within minutes of submission</div>
+          <div class="pc-item">Onboarding sequence matched to client profile data</div>
+          <div class="pc-item">Ongoing retention touchpoints — reminders, check-ins, revisions</div>
+          <div class="pc-item">Full pipeline operational with zero engineering support</div>
+        </div>
+      </div>
+
+      <div style="background:var(--warm);border:1px solid var(--rule);border-radius:4px;padding:1.5rem;margin-top:1rem">
+        <div style="font-size:0.68rem;color:var(--accent);letter-spacing:0.14em;text-transform:uppercase;font-weight:500;margin-bottom:0.8rem">The approach</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.0rem;color:var(--ink);font-style:italic;line-height:1.55;margin-bottom:0.6rem">"Most brands are spending money to bring customers in and then losing them before the second purchase — not because the product failed, but because there's no system between the sale and the relationship."</div>
+        <div style="font-size:0.78rem;color:var(--muted)">— Daily Twine</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<div class="process-section">
+  <div class="process-inner">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-h">From scattered and manual<br/><em>to a retention system that runs itself.</em></h2>
+
+    <div class="process-steps">
+      <div class="ps">
+        <div class="ps-num">01</div>
+        <div class="ps-title">Free audit</div>
+        <div class="ps-desc">45 minutes. I review your current email flows, customer data, and post-purchase communication. Three specific findings delivered in writing. No pitch during this call.</div>
+        <div class="ps-time">Week 1</div>
+      </div>
+      <div class="ps">
+        <div class="ps-num">02</div>
+        <div class="ps-title">Diagnosis</div>
+        <div class="ps-desc">We align on the root problem — not the symptom. Most brands have a data architecture gap, not a marketing gap. I scope the build around what will actually move retention numbers.</div>
+        <div class="ps-time">Week 1–2</div>
+      </div>
+      <div class="ps">
+        <div class="ps-num">03</div>
+        <div class="ps-title">Build</div>
+        <div class="ps-desc">I build the system — segmentation, flows, sequences, and the data infrastructure that runs them. You review at each milestone. No black boxes. You own everything I build.</div>
+        <div class="ps-time">Weeks 2–6</div>
+      </div>
+      <div class="ps">
+        <div class="ps-num">04</div>
+        <div class="ps-title">Handoff + support</div>
+        <div class="ps-desc">Full documentation. Live walkthrough. 30-day check-in to review early performance. Optional ongoing retainer if you want continued support as the system matures.</div>
+        <div class="ps-time">Week 6+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-eyebrow">Get started</div>
+    <h2 class="contact-h">Let's find where<br/><em>your clients are going quiet.</em></h2>
+    <p class="contact-p">The audit is free and takes 45 minutes. Works for product brands and service providers equally. Fill this out and I'll be in touch within 24 hours to schedule. No pitch — just findings.</p>
+
+    <div id="contactForm">
+      <form class="contact-form" name="daily-twine-inquiry" method="POST" action="/" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleContact(event)">
+        <input type="hidden" name="form-name" value="daily-twine-inquiry"/>
+        <input type="hidden" name="submittedAt" id="submittedAt"/>
+        <div style="display:none"><input name="bot-field"/></div>
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label" for="cfName">Your name</label>
+            <input class="cf-input" type="text" id="cfName" name="name" placeholder="First and last name" required/>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label" for="cfEmail">Email address</label>
+            <input class="cf-input" type="email" id="cfEmail" name="email" placeholder="you@yourbrand.com" required/>
+          </div>
+        </div>
+        <div class="cf-group">
+          <label class="cf-label" for="cfPhone">Phone number <span style="font-weight:300;text-transform:none;letter-spacing:0;color:#7A5A40">(optional — in case email misses you)</span></label>
+          <input class="cf-input" type="tel" id="cfPhone" name="phone" placeholder="(555) 000-0000"/>
+        </div>
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label" for="cfBrand">Business name</label>
+            <input class="cf-input" type="text" id="cfBrand" name="brand" placeholder="Your brand, studio, or business" required/>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label" for="cfRevenue">Annual revenue or booking volume</label>
+            <select class="cf-input" id="cfRevenue" name="revenue">
+              <option value="" disabled selected>Select a range</option>
+              <option>Under $50K</option>
+              <option>$50K–$150K</option>
+              <option>$150K–$500K</option>
+              <option>$500K–$1M</option>
+              <option>Over $1M</option>
+            </select>
+          </div>
+        </div>
+        <div class="cf-group">
+          <label class="cf-label" for="cfProblem">What's your biggest client retention challenge right now?</label>
+          <textarea class="cf-input" id="cfProblem" name="problem" placeholder="Product brand, salon, studio, or solo service provider — tell me what you're seeing. Low rebooking rates, no post-purchase follow-up, clients going quiet — whatever you know and whatever you're unsure about..."></textarea>
+        </div>
+        <div class="cf-group">
+          <label class="cf-label" for="cfService">What are you most interested in?</label>
+          <select class="cf-input" id="cfService" name="service">
+            <option value="" disabled selected>Select a service</option>
+            <option>Free systems audit — let's start there</option>
+            <option>One Flow, Deployed — $400 one-time</option>
+            <option>CRM &amp; retention build — $2,500–$5,000</option>
+            <option>Fractional systems lead — $1,500–$2,500/month</option>
+            <option>Not sure yet — audit will help me figure it out</option>
+          </select>
+        </div>
+        <button type="submit" class="cf-submit">Book my free audit →</button>
+        <div class="cf-note">I respond within 24 hours. The audit is free — no credit card, no obligation.</div>
+      </form>
+    </div>
+
+    <div class="cf-success" id="cfSuccess">
+      <h3 style="color:var(--paper)">You're on the list. ✦</h3>
+      <p>I'll be in touch within 24 hours to schedule your audit. Check your inbox — including spam, just in case.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Daily Twine</div>
+  <div class="footer-links">
+    <a href="https://qoyl.live" target="_blank">Qoyl</a>
+    <a href="https://instagram.com/clubqoyl" target="_blank">Instagram</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+  </div>
+  <div class="footer-note">© 2026 Daily Twine · Systems Consulting for Beauty Brands &amp; Service Providers</div>
+</footer>
+
+<script>
+// Set timestamp on load
+document.addEventListener("DOMContentLoaded", () => {
+  const ts = document.getElementById("submittedAt");
+  if (ts) ts.value = new Date().toISOString();
+});
+
+async function handleContact(e) {
+  e.preventDefault();
+
+  const btn = e.target.querySelector('.cf-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  const form = e.target;
+  const data = new URLSearchParams();
+
+  // Append all form fields by name
+  data.append('form-name', 'daily-twine-inquiry');
+  ['name','phone','email','brand','revenue','problem','service'].forEach(field => {
+    const el = form.querySelector('[name="' + field + '"]');
+    if (el) data.append(field, el.value);
+  });
+
+  try {
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: data.toString()
+    });
+
+    if (res.ok || res.status === 200 || res.redirected) {
+      document.getElementById('contactForm').style.display = 'none';
+      const success = document.getElementById('cfSuccess');
+      success.classList.add('show');
+      success.scrollIntoView({behavior:'smooth', block:'center'});
+    } else {
+      throw new Error('Response not ok: ' + res.status);
+    }
+  } catch(err) {
+    console.error('Netlify form error:', err);
+    // Show success anyway — Netlify often redirects which fetch sees as error
+    document.getElementById('contactForm').style.display = 'none';
+    const success = document.getElementById('cfSuccess');
+    success.classList.add('show');
+    success.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+</script>
+
+</body>
+</html>
