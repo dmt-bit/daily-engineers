@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Daily Twine helps beauty businesses eliminate operational waste, scale their processes, and build the retention systems that keep clients coming back.">
+<title>Daily Twine — Operations & Systems Consulting for Beauty Businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1714;
+    --ink-mid: #4A4540;
+    --ink-light: #8A847D;
+    --blush: #E8D5C4;
+    --blush-deep: #C4967A;
+    --sage: #B8C4B0;
+    --sage-deep: #6B8060;
+    --rule: rgba(26,23,20,0.12);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--cream);
+    border-bottom: 0.5px solid var(--rule);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    color: var(--ink-mid);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    background: var(--ink) !important;
+    color: var(--cream) !important;
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 2px !important;
+    font-size: 0.875rem !important;
+    transition: opacity 0.15s;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    padding: 7rem 2rem 5rem;
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blush-deep);
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 4vw, 3.2rem);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--blush-deep);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    max-width: 420px;
+    margin-bottom: 2rem;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: opacity 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { opacity: 0.82; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    border: 0.5px solid var(--ink-mid);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: border-color 0.15s, color 0.15s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* HERO STATS */
+  .hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .stat-card {
+    border: 0.5px solid var(--rule);
+    padding: 1.25rem 1.5rem;
+    background: white;
+    border-radius: 4px;
+  }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 2.25rem;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .stat-card.accent {
+    background: var(--blush);
+    border-color: transparent;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    max-width: 960px;
+    margin: 0 auto;
+    border: none;
+    border-top: 0.5px solid var(--rule);
+  }
+
+  /* SECTION */
+  section {
+    padding: 5rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blush-deep);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .section-heading {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+
+  .section-heading em { font-style: italic; color: var(--blush-deep); }
+
+  .section-body {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  /* WHO I SERVE */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 0.5px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .audience-card {
+    background: white;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .audience-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--blush);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .audience-icon span {
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  .audience-card h3 {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .audience-card p {
+    font-size: 0.82rem;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  /* PAIN STRIP */
+  .pain-strip {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 4rem 2rem;
+  }
+
+  .pain-strip-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .pain-strip .section-label { color: var(--blush); }
+
+  .pain-strip .section-heading { color: var(--cream); }
+
+  .pain-strip .section-heading em { color: var(--blush); }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .pain-item {
+    border-top: 0.5px solid rgba(255,255,255,0.18);
+    padding-top: 1.25rem;
+  }
+
+  .pain-who {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blush);
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+  }
+
+  .pain-item h3 {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+
+  .pain-item p {
+    font-size: 0.85rem;
+    color: rgba(250,247,242,0.65);
+    line-height: 1.65;
+  }
+
+  /* SERVICES */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .service-card {
+    background: white;
+    border: 0.5px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.75rem 1.5rem;
+    position: relative;
+  }
+
+  .service-card.featured {
+    border: 1.5px solid var(--blush-deep);
+  }
+
+  .service-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .tag-ops {
+    background: #EAF0E8;
+    color: var(--sage-deep);
+  }
+
+  .tag-retention {
+    background: var(--blush);
+    color: #7A4A2E;
+  }
+
+  .tag-popular {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .service-card h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+
+  .service-price {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .service-card p {
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .service-details {
+    list-style: none;
+    border-top: 0.5px solid var(--rule);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .service-details li {
+    font-size: 0.8rem;
+    color: var(--ink-mid);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .service-details li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--blush-deep);
+    font-size: 0.75rem;
+  }
+
+  /* CREDENTIAL */
+  .credential-strip {
+    background: var(--blush);
+    padding: 4rem 2rem;
+  }
+
+  .credential-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .credential-inner .section-heading { margin-bottom: 1rem; }
+
+  .credential-inner .section-body { margin-bottom: 1.5rem; }
+
+  .cred-facts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cred-fact {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .cred-num {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    color: var(--blush-deep);
+    line-height: 1;
+    min-width: 60px;
+  }
+
+  .cred-desc {
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    padding-top: 0.2rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pill {
+    font-size: 0.75rem;
+    border: 0.5px solid var(--rule);
+    border-radius: 20px;
+    padding: 4px 12px;
+    color: var(--ink-mid);
+    background: white;
+  }
+
+  .about-quote {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.55;
+    border-left: 2px solid var(--blush-deep);
+    padding-left: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* HOW IT WORKS */
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 1rem;
+  }
+
+  .process-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+    border-top: 0.5px solid var(--rule);
+    align-items: start;
+  }
+
+  .step-num {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--blush-deep);
+    line-height: 1;
+    padding-top: 0.15rem;
+  }
+
+  .step-content h3 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .step-content p {
+    font-size: 0.875rem;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  .step-timing {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blush-deep);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--ink);
+    padding: 5rem 2rem;
+  }
+
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .contact-inner .section-label { color: var(--blush); }
+  .contact-inner .section-heading { color: var(--cream); }
+  .contact-inner .section-heading em { color: var(--blush); }
+
+  .contact-inner .section-body {
+    color: rgba(250,247,242,0.65);
+    margin-bottom: 2rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.55);
+    font-weight: 500;
+  }
+
+  input, select, textarea {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.07);
+    border: 0.5px solid rgba(255,255,255,0.2);
+    color: var(--cream);
+    padding: 0.65rem 0.85rem;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+
+  input::placeholder, textarea::placeholder { color: rgba(250,247,242,0.3); }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: rgba(255,255,255,0.5);
+  }
+
+  select option { background: var(--ink); color: var(--cream); }
+
+  textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--blush-deep);
+    color: white;
+    border: none;
+    padding: 0.85rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: opacity 0.15s;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { opacity: 0.88; }
+
+  .form-note {
+    font-size: 0.75rem;
+    color: rgba(250,247,242,0.4);
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: rgba(250,247,242,0.45);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover { color: var(--cream); }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(250,247,242,0.3);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 1.25rem 3rem; }
+    .hero-stats { flex-direction: row; flex-wrap: wrap; }
+    .hero-stats .stat-card { flex: 1 1 140px; }
+    section { padding: 3.5rem 1.25rem; }
+    .pain-strip, .credential-strip, .contact-section { padding: 3.5rem 1.25rem; }
+    .credential-inner, .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; align-items: flex-start; padding: 1.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Daily Twine</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#contact" class="nav-cta">Book a free audit</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div style="max-width:960px; margin:0 auto; padding: 0 2rem;">
+  <div class="hero" style="padding-left:0; padding-right:0;">
+    <div>
+      <p class="hero-eyebrow">Operations &amp; Systems Consulting · Beauty Industry</p>
+      <h1>Your business works.<br><em>Now make it scale.</em></h1>
+      <p class="hero-sub">I help beauty businesses — salons, indie brands, and service providers — eliminate operational waste, fix the systems that are breaking, and build the infrastructure that brings clients back.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book a free audit</a>
+        <a href="#services" class="btn-secondary">See how I work</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card accent">
+        <div class="stat-number">$13M</div>
+        <div class="stat-label">Manufacturing expansion led</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2×</div>
+        <div class="stat-label">Capacity delivered</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">30%</div>
+        <div class="stat-label">Deviation reduction</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- WHO I SERVE -->
+<section id="who">
+  <p class="section-label">Who I work with</p>
+  <h2 class="section-heading">Built for <em>every corner of beauty.</em></h2>
+  <p class="section-body">Whether you provide services, sell products, or both — the operational and systems challenges are recognizable. I know this industry from the inside.</p>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="audience-icon"><span>✂</span></div>
+      <h3>Salon owners &amp; suite renters</h3>
+      <p>Schedule inefficiency, retail waste, staff turnover, and client retention — these are operations problems, not people problems.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon"><span>◈</span></div>
+      <h3>Indie beauty brands</h3>
+      <p>Scaling from small-batch to real production means your contract manufacturer, your supply chain, and your fulfillment have to work together.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon"><span>◉</span></div>
+      <h3>Freelance service providers</h3>
+      <p>Nail, wax, lash, brow, and makeup artists who want to run a tighter book, reduce supply waste, and grow without burning out.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon"><span>⬡</span></div>
+      <h3>Beauty tech &amp; wellness brands</h3>
+      <p>Product companies with operational complexity — manufacturing partnerships, quality processes, and the systems to support them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN STRIP -->
+<div class="pain-strip">
+  <div class="pain-strip-inner">
+    <p class="section-label">What brings clients here</p>
+    <h2 class="section-heading">The problems that <em>keep showing up.</em></h2>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <p class="pain-who">Salon owners</p>
+        <h3>The schedule always runs over</h3>
+        <p>Service times are inconsistent, gaps appear between clients, and the day ends late. This is a process problem — not a staff problem.</p>
+      </div>
+      <div class="pain-item">
+        <p class="pain-who">Indie brands</p>
+        <h3>Scaling production is chaos</h3>
+        <p>The contract manufacturer relationship is unpredictable. Batches fail. Lead times stretch. You're reacting instead of managing.</p>
+      </div>
+      <div class="pain-item">
+        <p class="pain-who">Freelancers</p>
+        <h3>No-shows are eating your revenue</h3>
+        <p>Cancellations and gaps in the book cost real money. Without a system managing them, you absorb the loss every time.</p>
+      </div>
+      <div class="pain-item">
+        <p class="pain-who">All beauty businesses</p>
+        <h3>Clients come once and go quiet</h3>
+        <p>You spend money acquiring a client and then nothing happens after their first visit or purchase. The relationship just stops.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUDIT CTA STRIP 1 -->
+<div style="background:var(--blush); padding:2.5rem 2rem; text-align:center;">
+  <p style="font-family:var(--serif); font-size:1.3rem; color:var(--ink); margin-bottom:0.6rem;">Recognize your business in any of those?</p>
+  <p style="font-size:0.9rem; color:var(--ink-mid); margin-bottom:1.25rem;">The audit is free — just a conversation. No pitch, no obligation. I'll tell you exactly what I see.</p>
+  <a href="#contact" class="btn-primary">Book your free audit →</a>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label">Services</p>
+  <h2 class="section-heading">Four ways I work <em>with you.</em></h2>
+  <p class="section-body">Every engagement starts the same way — a free conversation about what's actually breaking. From there, you choose how deep to go. Most clients start with First Fix and build from there.</p>
+  <div class="services-grid">
+
+    <div class="service-card" style="border: 1.5px solid var(--blush-deep); grid-column: 1 / -1;">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.75rem; margin-bottom:1rem;">
+        <span class="service-tag tag-popular" style="margin-bottom:0;">Best place to start</span>
+        <a href="#contact" class="btn-primary" style="font-size:0.82rem; padding:0.5rem 1.1rem;">Book free audit — it's included →</a>
+      </div>
+      <h3>First Fix</h3>
+      <p class="service-price">Free audit + $200 · one deliverable</p>
+      <p style="max-width:600px;">We start with a free conversation — no agenda, just your current challenges. I listen, ask the right questions, and identify your single most pressing issue. Then for $200 I solve it: a process fix, a script, a booking system tweak, a simple automation, a template — whatever your audit reveals. One real thing, done.</p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-top:1.25rem; padding-top:1.25rem; border-top:0.5px solid var(--rule);">
+        <div>
+          <p style="font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--blush-deep); font-weight:500; margin-bottom:0.4rem;">What's included</p>
+          <ul class="service-details" style="border:none; padding:0;">
+            <li>Free 45-min audit call — no pitch, just listening</li>
+            <li>Your most pressing issue identified and named</li>
+            <li>One concrete solution built and delivered</li>
+            <li>Written so you can use it without me</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--blush-deep); font-weight:500; margin-bottom:0.4rem;">What it could look like</p>
+          <ul class="service-details" style="border:none; padding:0;">
+            <li>A no-show reduction script for your booking flow</li>
+            <li>A service time standard for your most common appointment</li>
+            <li>A simple win-back message for lapsed clients</li>
+            <li>A supplier communication template</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+      <span class="service-tag tag-ops">Start here</span>
+      <h3>Operations Clarity Audit</h3>
+      <p class="service-price">$500 – $1,500 · one-time</p>
+      <p>I map your current operations or client flow, identify where waste is happening, and deliver a written action plan with three prioritized fixes. No fluff — just what to do first.</p>
+      <ul class="service-details">
+        <li>Process mapping — current state documented</li>
+        <li>Waste and bottleneck identification</li>
+        <li>Three prioritized findings in writing</li>
+        <li>Works for service businesses and product brands</li>
+        <li>Delivered within two weeks</li>
+      </ul>
+    </div>
+
+    <div class="service-card featured">
+      <span class="service-tag tag-popular">Most popular</span>
+      <h3>Ongoing Advisory Retainer</h3>
+      <p class="service-price">$3,000 – $8,000 / month</p>
+      <p>I become your part-time operations and systems lead — solving problems as they arise, building new processes, analyzing what's working, and keeping things from breaking as you grow.</p>
+      <ul class="service-details">
+        <li>Monthly ops and retention strategy review</li>
+        <li>New process and system builds as needed</li>
+        <li>Availability for decision support and troubleshooting</li>
+        <li>Performance tracking — what's improving, what isn't</li>
+        <li>~15–20 hours per month</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-retention">Full transformation</span>
+      <h3>Operations &amp; Systems Transformation</h3>
+      <p class="service-price">$15,000 – $30,000 · project</p>
+      <p>End-to-end redesign of your operational processes and client systems. For businesses ready to stop patching problems and build infrastructure that can handle serious scale.</p>
+      <ul class="service-details">
+        <li>Full current-state process audit and mapping</li>
+        <li>Redesign of core operations — scheduling, production, fulfillment</li>
+        <li>CRM and retention system build</li>
+        <li>Team training and documented SOPs</li>
+        <li>30-day post-launch support included</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- CREDENTIAL STRIP -->
+<div class="credential-strip">
+  <div class="credential-inner">
+    <div>
+      <p class="section-label">The work behind the work</p>
+      <h2 class="section-heading">Engineering rigor, <em>applied to beauty.</em></h2>
+      <p class="section-body">Most consultants advise. I build. My background is in designing systems that operate under real pressure — regulated manufacturing environments where waste has consequences. I bring that same discipline to every beauty business I work with.</p>
+      <a href="#contact" class="btn-primary">Book your audit</a>
+    </div>
+    <div class="cred-facts">
+      <div class="cred-fact">
+        <div class="cred-num">$13M</div>
+        <div class="cred-desc">Manufacturing expansion led as project engineer — delivered 2× capacity ahead of schedule</div>
+      </div>
+      <div class="cred-fact">
+        <div class="cred-num">30%</div>
+        <div class="cred-desc">Reduction in production deviations — a direct result of process redesign and operator training</div>
+      </div>
+      <div class="cred-fact">
+        <div class="cred-num">5%</div>
+        <div class="cred-desc">Yield improvement delivered through systematic waste elimination, not guesswork</div>
+      </div>
+      <div class="cred-fact">
+        <div class="cred-num">5+</div>
+        <div class="cred-desc">Years in pharma, food, and medical device operations at Merck, Diageo, GE Healthcare, and AbbVie</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUDIT CTA STRIP 2 -->
+<div style="border-top:0.5px solid var(--rule); border-bottom:0.5px solid var(--rule); padding:2rem 2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; max-width:960px; margin:0 auto;">
+  <p style="font-family:var(--serif); font-size:1.1rem; color:var(--ink);">Not sure where to start? <em>That's what the audit is for.</em></p>
+  <a href="#contact" class="btn-primary" style="white-space:nowrap;">Book free audit →</a>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About</p>
+  <div class="about-grid">
+    <div>
+      <h2 class="section-heading">Daily Twine<br><em>is Daily Twine.</em></h2>
+      <p style="font-size:0.95rem; color:var(--ink-mid); line-height:1.75; margin-bottom:1.25rem;">I'm Daily Twine — systems engineer, operations consultant, and founder of <a href="https://qoyl.live" style="color:var(--blush-deep); text-decoration:none; font-weight:500;">Qoyl</a>, a hair care intelligence platform for type 4 hair. I work in this industry, not just for it.</p>
+      <p style="font-size:0.95rem; color:var(--ink-mid); line-height:1.75; margin-bottom:1.5rem;">My background is in pharmaceutical and food manufacturing — designing systems that operate under FDA scrutiny, scaling production lines, and turning chaotic processes into documented, repeatable ones. I apply the same thinking to beauty businesses because the problems are the same: too much waste, too little visibility, and growth that exposes every crack in the foundation.</p>
+      <div class="about-pills">
+        <span class="pill">MS Systems Engineering · UVA</span>
+        <span class="pill">Merck</span>
+        <span class="pill">Diageo</span>
+        <span class="pill">GE Healthcare</span>
+        <span class="pill">AbbVie</span>
+        <span class="pill">bioMérieux</span>
+        <span class="pill">HACO</span>
+      </div>
+    </div>
+    <div>
+      <blockquote class="about-quote">"Most beauty businesses are spending money to bring clients in and then losing them before the second visit — not because the experience failed, but because there's no system between the transaction and the relationship."</blockquote>
+      <p style="font-size:0.85rem; color:var(--ink-light); margin-bottom:1.5rem;">— Daily Twine</p>
+      <p style="font-size:0.88rem; color:var(--ink-mid); line-height:1.7;">I also know what it takes to build from nothing. I designed and deployed a full client intake and retention system for Qoyl solo — no engineering team, no agency, under 30 days. That's the same infrastructure I build for clients.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <p class="section-label">The process</p>
+  <h2 class="section-heading">From scattered and manual <em>to a business that runs.</em></h2>
+  <p class="section-body">Every engagement is scoped around what's actually broken — not what's easiest to sell. The audit comes first, always.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <p class="step-timing">Week 1</p>
+        <h3>Free audit</h3>
+        <p>45–60 minutes. I review your current operations, client flow, and communications. Three specific findings delivered in writing. No pitch during the audit — just an honest look at what's happening.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <p class="step-timing">Week 1–2</p>
+        <h3>Diagnosis</h3>
+        <p>We align on the root problem, not the symptom. Most beauty businesses have a process gap or a data architecture gap — not a marketing gap. I scope the engagement around what will actually move the numbers.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <p class="step-timing">Weeks 2–6</p>
+        <h3>Build</h3>
+        <p>I design and build the system — process redesigns, automations, CRM flows, SOPs, whatever the diagnosis points to. You review at each milestone. No black boxes. You own everything.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <p class="step-timing">Week 6+</p>
+        <h3>Handoff and support</h3>
+        <p>Full documentation. Live walkthrough. 30-day check-in to review early performance. Optional ongoing retainer if you want continued support as the system matures and your business grows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <p class="section-label">Get started</p>
+    <h2 class="section-heading">Let's find where <em>your business is leaking.</em></h2>
+    <p class="section-body">The audit is free — 45 minutes, written findings, no pitch. Fill this out and I'll be in touch within 24 hours to schedule. Works for product brands and service providers equally.</p>
+    <form name="audit-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="audit-inquiry">
+    <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+    <div class="form-row">
+      <div class="form-field">
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" placeholder="Full name">
+      </div>
+      <div class="form-field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="you@brand.com">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-field">
+        <label for="business">Business name</label>
+        <input type="text" id="business" name="business" placeholder="Your business">
+      </div>
+      <div class="form-field">
+        <label for="type">Type of business</label>
+        <select id="type" name="type">
+          <option value="" disabled selected>Select one</option>
+          <option>Salon or studio</option>
+          <option>Freelance service provider</option>
+          <option>Indie beauty brand</option>
+          <option>Beauty tech or wellness brand</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="revenue">Annual revenue or booking volume</label>
+      <select id="revenue" name="revenue">
+        <option value="" disabled selected>Select a range</option>
+        <option>Under $50K</option>
+        <option>$50K – $150K</option>
+        <option>$150K – $500K</option>
+        <option>$500K – $1M</option>
+        <option>Over $1M</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="challenge">What's your biggest operational challenge right now?</label>
+      <textarea id="challenge" name="challenge" placeholder="Describe what's breaking or slowing you down..."></textarea>
+    </div>
+    <div class="form-field">
+      <label for="interest">What are you most interested in?</label>
+      <select id="interest" name="interest">
+        <option value="" disabled selected>Select one</option>
+        <option>Free audit — just want to talk first</option>
+        <option>First Fix — free audit + one solution ($200)</option>
+        <option>Operations Clarity Audit — $500–$1,500</option>
+        <option>Ongoing Advisory Retainer — $3,000–$8,000/mo</option>
+        <option>Operations &amp; Systems Transformation — $15,000–$30,000</option>
+        <option>Not sure yet — the audit will help</option>
+      </select>
+    </div>
+    <button class="form-submit" type="submit">Book my free audit →</button>
+    <p class="form-note">I respond within 24 hours. No credit card, no obligation.</p>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Daily Twine</a>
+  <ul class="footer-links">
+    <li><a href="https://qoyl.live">Qoyl</a></li>
+    <li><a href="https://instagram.com/clubqoyl">Instagram</a></li>
+    <li><a href="https://linkedin.com">LinkedIn</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Daily Twine · Operations &amp; Systems Consulting for Beauty Businesses</span>
+</footer>
+
+</body>
+</html>
